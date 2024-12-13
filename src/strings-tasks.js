@@ -249,11 +249,11 @@ function endsWith(str, substr) {
  *   formatTime(0, 0) => "00:00"
  */
 function formatTime(minutes, seconds) {
-  if (minutes >= 0 && seconds >= 0) {
-    return `${Math.floor(minutes / 60)} : ${Math.floor(seconds / 60)}`;
-  }
-  return null;
+  const date = new Date(0);
+  return date.toTimeString(minutes, seconds);
 }
+
+formatTime(0, 45);
 
 /**
  * Returns a string in reverse order.
@@ -380,8 +380,20 @@ function reverseWords(str) {
  *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase(/* str */) {
-  throw new Error('Not implemented');
+function invertCase(str) {
+  let s = '';
+  let count = 0;
+  while (count < str.length) {
+    let n = str.charAt(count);
+    if (n === n.toUpperCase()) {
+      n = n.toLowerCase();
+    } else {
+      n = n.toUpperCase();
+    }
+    count += 1;
+    s += n;
+  }
+  return s;
 }
 
 /**
@@ -397,8 +409,8 @@ function invertCase(/* str */) {
  *   getStringFromTemplate('John','Doe') => 'Hello, John Doe!'
  *   getStringFromTemplate('Chuck','Norris') => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(/* firstName, lastName */) {
-  throw new Error('Not implemented');
+function getStringFromTemplate(firstName, lastName) {
+  return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -411,8 +423,9 @@ function getStringFromTemplate(/* firstName, lastName */) {
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  const str = value.length - 1;
+  return value.substring(str, 7);
 }
 
 /**
@@ -426,8 +439,8 @@ function extractNameFromTemplate(/* value */) {
  *   unbracketTag('<span>') => 'span'
  *   unbracketTag('<a>') => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+function unbracketTag(str) {
+  return str.slice(1, -1);
 }
 
 /**
@@ -445,8 +458,8 @@ function unbracketTag(/* str */) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.split(';');
 }
 
 /**
@@ -465,8 +478,9 @@ function extractEmails(/* str */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  // eslint-disable-next-line prettier/prettier
+  return str.split('').map((letter) => {return String.fromCharCode(letter.charCodeAt(0) + (letter.toLowerCase() < 'n' ? 13 : -13))}).join('');
 }
 
 /**
